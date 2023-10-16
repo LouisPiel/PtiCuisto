@@ -7,10 +7,10 @@
 </head>
 <body>
     <?php
-        $servername = "localhost";
-        $username = "username";
-        $password = "password";
-        $dbname = "myDB";
+        $servername = getenv("servername");
+        $username = getenv("username");
+        $password = getenv("password");
+        $dbname = getenv("dbname");
         
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,7 +19,7 @@
         die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM Recettes";
+        $sql = "SELECT * FROM Recette";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>test</h1>
+    <!-- header -->
+    <?php include ('header.php'); ?> 
+
+
+
+    <!-- footer -->
+    <?php include ('footer.php'); ?> 
 </body>
 </html>

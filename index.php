@@ -7,29 +7,35 @@
 </head>
 <body>
     <?php
+    //Récupération des valeurs d'environnement
         $servername = getenv("servername");
         $username = getenv("username");
         $password = getenv("password");
         $dbname = getenv("dbname");
         
-        // Create connection
+        // Créer une  connexion
         $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
+        // Vérifier la connexion
         if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
         }
 
+        //Récupérer toute les recettes
         $sql = "SELECT * FROM Recette";
         $result = $conn->query($sql);
-
+        
         if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "id: " . $row["id"]. "<br>";
+            echo "<div><h4>". $row["Titre"]."</h4><br><p class=\"resume\">".$row["Résumé"].
+            "</p><br><p class=\"contenu\">".$row["Contenu"]."</p><br><p class=\"id categorie\">"
+            .$row["id"]." ".$row["Categorie"]."</p></div>";
         }
         } else {
         echo "Aucun résultat";
         }
+
+
         $conn->close();
     ?>
 </body>

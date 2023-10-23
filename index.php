@@ -22,11 +22,11 @@
 
         //Récupérer toute les recettes
         $sql = "SELECT * FROM Recette";
-        $result = $conn->query($sql);
+        $resultats = $conn->query($sql);
         
-        if ($result->num_rows > 0) {
+        if ($resultats->num_rows > 0) {
         // output data of each row
-        while($row = $result->fetch_assoc()) {
+        while($row = $resultats->fetch_assoc()) {
             echo "<div><h4>". $row["Titre"]."</h4><br><p class=\"resume\">".$row["Résumé"].
             "</p><br><p class=\"contenu\">".$row["Contenu"]."</p><br><p class=\"id categorie\">"
             .$row["id"]." ".$row["Categorie"]."</p></div>";
@@ -43,11 +43,11 @@
         if ($filtreNom != NULL)
         {
             $sql = "SELECT * FROM Recette where Titre like \"%".$filtreNom."\"";
-            $result = $conn->query($sql);
+            $resultats = $conn->query($sql);
             
-            if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
+            if ($resultats->num_rows > 0) {
+            // Si on a au moins un résultat, association par sous-objet du résultat
+            while($row = $resultats->fetch_assoc()) {
                 echo "<div><h4>". $row["Titre"]."</h4><br><p class=\"resume\">".$row["Résumé"].
                 "</p><br><p class=\"contenu\">".$row["Contenu"]."</p><br><p class=\"categorie\">"
                 .$row["Categorie"]."</p><br><p class=\"image\">".$row["Image"]."</p><br><p class=\"id auteur\">"

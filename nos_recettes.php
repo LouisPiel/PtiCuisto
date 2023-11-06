@@ -9,6 +9,30 @@
 <body>
     <!--Il faut que chaque filtre ajoute un tag qui limite la recherche-->
     <!--Fenêtres modales-->
+
+    <?php 
+
+        $db_host= getenv('host');
+        $db_port= getenv('port');
+        $db_name= getenv('dbname');
+        $db_username= getenv('username');
+        $db_password= getenv('password');
+        try{
+            //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
+
+            $mysqlConnection = new PDO("mysql:host=$db_host:$db_port;dbname=$db_name;charset=utf8",$db_username ,$db_password );
+        }
+        catch (Exception $e)
+        {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        $sql = $dbh->query('SELECT rec_id FROM recette');
+        foreach ($conn->query($sql) as $row) {
+
+            printf("$row[0] $row[1] $row[2]\n");
+        }
+    ?>
     <div id="modaleNom" class="modal" aria-modal="true" aria-labelledby="modal-heading">
         <div class="modal-content">
             <span class="close">&times;</span>

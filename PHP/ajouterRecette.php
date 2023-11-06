@@ -53,9 +53,10 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-$sql = 'SELECT rec_id FROM recette';
+$sql = $dbh->query('SELECT rec_id FROM recette');
 foreach ($conn->query($sql) as $row) {
-    print $row['rec_id'] . "\t";
+
+    printf("$row[0] $row[1] $row[2]\n");
 }
 ?>
 </body>

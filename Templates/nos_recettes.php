@@ -7,32 +7,12 @@
     <link rel="stylesheet" href="./Style/style.css">
 </head>
 <body>
+    <?php 
+        require('src/model.php');
+    ?>
+
     <!--Il faut que chaque filtre ajoute un tag qui limite la recherche-->
     <!--Fenêtres modales-->
-
-    <?php 
-
-        $db_host= getenv('host');
-        $db_port= getenv('port');
-        $db_name= getenv('dbname');
-        $db_username= getenv('username');
-        $db_password= getenv('password');
-        try{
-            //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
-
-            $mysqlConnection = new PDO("mysql:host=$db_host:$db_port;dbname=$db_name;charset=utf8",$db_username ,$db_password );
-        }
-        catch (Exception $e)
-        {
-            die('Erreur : ' . $e->getMessage());
-        }
-
-        $sql = $dbh->query('SELECT rec_id FROM recette');
-        foreach ($conn->query($sql) as $row) {
-
-            printf("$row[0] $row[1] $row[2]\n");
-        }
-    ?>
     <div id="modaleNom" class="modal" aria-modal="true" aria-labelledby="modal-heading">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -69,7 +49,26 @@
         <button id="button_filtre_ingredient" class="bt_filtre">Ingredients</button>   
     </section>
     <section id="resultats">
+        
+    <?php
+        try{    //Connexion à la BDD
+            //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
 
+            $mysqlConnection = new PDO("mysql:host=$db_host:$db_port;dbname=$db_name;charset=utf8",$db_username ,$db_password );
+        }
+        catch (Exception $e)
+        {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        $sql = $dbh->query('SELECT rec_id FROM recette');   //Récupération des recettes et affichage dans tableau
+        echo "<table>
+        <thead><tr><th colspan=\"2\">Recettes</th></tr></thead><tbody><tr>";
+        foreach ($conn->query($sql) as $row) {
+            echo "<td>$row[0] $row[1] $row[2]</td>";
+        }
+            echo "</tr></tbody></table>";
+        ?>
     </section>
     <script src="./Scripts/nos_recettes.js"></script>
 </body>

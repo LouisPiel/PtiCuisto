@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PtiCuisto</title>
-</head>
-<body>
-    
-</body>
-</html>
+<?php 
+    //Récupération des infos de connexion dans fichier .env
+    $db_host= getenv('host');
+    $db_port= getenv('port');
+    $db_name= getenv('dbname');
+    $db_username= getenv('username');
+    $db_password= getenv('password');
+
+    require('templates/homepage.php');
+?>

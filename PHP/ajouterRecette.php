@@ -38,26 +38,36 @@
 
 <?php
 
-$db_host = 'mysql.info.unicaen.fr';
+/*$db_host = 'mysql.info.unicaen.fr';
 $db_name = 'sefriou221_bd';
 $db_username = 'sefriou221';
 $db_port = '3306';
-$db_password = 'chei4pi0Eevoopho';
+$db_password = 'chei4pi0Eevoopho';*/
+
+$db_host = 'localhost';
+$db_name = 'pticuisto';
+$db_username = 'biscuit';
+$db_port = '80';
+$db_password = 'carbonara';
 
 try{
     //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
-    $mysqlConnection = new PDO("mysql:host=$db_host:$db_port;dbname=$db_name;charset=utf8",$db_username ,$db_password );
+    $mysqlConnection = new PDO("mysql:host='localhost';dbname='pticuisto';charset=utf8",'root' ,'root');
 }
 catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
 
-$sql = $dbh->query('SELECT rec_id FROM recette');
-foreach ($conn->query($sql) as $row) {
+$sth = $mysqlConnection->query('SELECT * FROM recette');
 
-    printf("$row[0] $row[1] $row[2]\n");
-}
+$rows = $sth->fetchAll();
+
+var_dump($rows);
+/*foreach ($rows as $row) {
+
+    echo ("$row[0] $row[1] $row[2]\n");
+}*/
 ?>
 </body>
 </html>

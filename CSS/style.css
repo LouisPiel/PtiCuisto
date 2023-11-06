@@ -1,71 +1,92 @@
+body{
+  min-width: 353px;
+}
+
 nav{
-  background-color: #7890cd;
+    background-color: #7890cd;
+}
+
+header{
+    max-height: 40em;
 }
 
 .nav-item{
-  font-size: 2em;
-  padding: 0 1em 0 1em;
+    font-size: 2em;
+    padding: 0 2em 0 0;
 }
 
 
 a:link, a:visited, a:active, a:focus, a{
-  color : #ffffff;
+    color : #ffffff;
 }
 
 ul.dropdown-menu{
-  background-color: #7890cd;
-  border-radius: 0;
-  font-size:0.80em;
-  margin-top: 0.8em;
-  text-align: center;
+    background-color: #7890cd;
+    border-radius: 0;
+    font-size:0.80em;
+    margin-top: 0.8em;
+    text-align: center;
 }
 
 hr.dropdown-divider{
-  margin:0 1em 0 1em;
+    margin:0 1em 0 1em;
+
+}
+
+.navbar-collapse{
+  flex-basis: auto;
+}
+
+footer{
+  position:absolute;
+  bottom:0;
+  background-color:  #2d3990;
+  height:4em;
+  width: 100%;
+  display:flex;
+}
+
+#foot{
+  margin:auto;
+  background-color: #ffffff;
+  width: 6.4em;
+  padding-top: 4px;
+  height: 2.1em;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-foot{
+  padding: 0 2px 0 2px;
+  color: black;
+}
+
+  /* Hide the link that should open and close the topnav on small screens */
+  .topnav .icon {
+    display: none;
+  } 
+  /* MEDIA QUERIES */
+
+   /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+   @media screen and (max-width: 1135px) {
+    .topnav a{display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
   
-}
-
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-  display: none;
-  text-align: right;
-} 
-
-
-
-
-
-
-
-
-
-/* MEDIA QUERIES */
-
- /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
- @media screen and (max-width: 1158px) {
-  .topnav a{display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-  .navbar-nav{display:none;}
-}
-
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
-@media screen and (max-width: 1158px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive a.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-
-  .topnav.topnav.responsive ul{
-    display:block;
-  }
-} 
+  /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+  @media screen and (max-width: 1135px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  } 

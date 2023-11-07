@@ -6,8 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-
     <form action = "<?php print $_SERVER['PHP_SELF'];?>" method = "post">
+
+    <input type="text" name="auteur">
 
     <select id="cat" name="categorie" size="3">
             <option value='entree'>Entrée</option>
@@ -37,9 +38,10 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-if(isset($_POST['categorie'])){
+if(isset($_POST['categorie']) && isset($_POST['auteur'])){
 
     $categorie = $_POST['categorie'];
+
     echo 'value: '.$categorie;
 
     $sth = $pdo->query('SELECT * FROM recette');
@@ -56,7 +58,25 @@ if(isset($_POST['categorie'])){
         'aut_id' => $auteur,
     ];
 
-    $requete = "Insert Into recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (:Titre,53,:Resume,(Select cat_id from categorie where Intitule='".$categorie."'),'image',now(),now(),:aut_id)";
+    $requete =
+    "Insert Into recette (
+        Titre, 
+        cont_id, 
+        Resume, 
+        cat_id, 
+        Image, 
+        DateCreation, 
+        DateModification, 
+        aut_id) 
+        VALUES 
+        (:Titre,
+        53,
+        :Resume,
+        (Select cat_id from categorie where Intitule='".$categorie."'),
+        'image',
+        now(),
+        now(),
+        (Select user_id from categorie where Pseudo='".$categorie."'))";
 
     //$requete = "insert into recette (Titre) values ('baguette')";
 

@@ -2,6 +2,8 @@ body{
   min-width: 353px;
 }
 
+/*NAVBAR*/
+
 nav{
     background-color: #7890cd;
 }
@@ -37,8 +39,68 @@ hr.dropdown-divider{
   flex-basis: auto;
 }
 
+/*ACCEUIL*/
+
+#image-acceuil{
+  margin-top: 3em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 73.33vi;
+  height: 70vh;
+}
+
+#container{
+  width: 100vi;
+  display:inline-flex;
+  justify-content: space-evenly;
+}
+
+#derniereRecettes{
+  border: solid  1px #999999 ;
+  margin-top :2em;
+  width: 30vi;
+  height: 60vh;
+}
+
+h1{
+  text-align: center;
+  color: #2d3990;
+}
+
+#image-edito{
+  width: 10vi;
+  display: block;
+  margin-top :2em;
+  margin-bottom: 2em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#edito{
+  border: solid  1px #999999 ;
+  margin-top :2em;
+  width: 30vi;
+  height: 60vh;
+  background-color: #2d3990;
+}
+
+
+h2{
+  text-align: center;
+  color: #ffffff;
+}
+
+p#texte-edito{
+  color: #ffffff;
+  margin: 1em 1em 1em 1em;
+  font-weight: bold;
+}
+
+
+/* FOOTER */
 footer{
-  position:absolute;
+  position:sticky;
   bottom:0;
   background-color:  #2d3990;
   height:4em;

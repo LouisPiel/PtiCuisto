@@ -1,13 +1,7 @@
 <?php
 
     require_once("Modeles/utilisateur.php");
-
-    enum TypeUtilisateur
-    {
-        case UTILISATEUR;
-        case EDITEUR;
-        case ADMINISTRATEUR;
-    }
+    require_once('src/model.php');
 
     class Controller {
         protected function render($view, $data = []) {

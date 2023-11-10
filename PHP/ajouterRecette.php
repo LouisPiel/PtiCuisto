@@ -40,10 +40,11 @@
     <input type="submit" name="inserer" value='Ajouter la recette!'>
 </form>
 <?php
+$env = parse_ini_file("../.env");
 
 try{
    
-    $pdo = new PDO("mysql:host=".$_ENV['DATABASE_HOST'].";dbname=".$_ENV['DATABASE_NAME'].";charset=utf8",$_ENV['DATABASE_NAME'] ,$_ENV['DATABASE_PASSWORD']);
+    $pdo = new PDO("mysql:host=".$env['DATABASE_HOST'].";dbname=".$env['DATABASE_NAME'].";charset=utf8",$env['DATABASE_USER'] ,$env['DATABASE_PASSWORD']);
 }
 catch (Exception $e)
 {

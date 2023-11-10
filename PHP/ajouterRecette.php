@@ -41,21 +41,14 @@
 </form>
 <?php
 
-$db_host = 'localhost';
-$db_name = 'PtitCuisto';
-$db_username = 'biscuit';
-$db_port = '80';
-$db_password = 'carbonara';
-
 try{
-    //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
-    $pdo = new PDO("mysql:host=mysql.info.unicaen.fr:3306;dbname=sefriou221_3;charset=utf8",'sefriou221' ,'chei4pi0Eevoopho');
+   
+    $pdo = new PDO("mysql:host=".$_ENV['DATABASE_HOST'].";dbname=".$_ENV['DATABASE_NAME'].";charset=utf8",$_ENV['DATABASE_NAME'] ,$_ENV['DATABASE_PASSWORD']);
 }
 catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
-
 if(isset($_POST['categorie']) && isset($_POST['auteur']) && isset($_POST['resume']) && isset($_POST['titre']) && isset($_POST['image']) && isset($_POST['inserer'])){
 
     echo 'tes la?';

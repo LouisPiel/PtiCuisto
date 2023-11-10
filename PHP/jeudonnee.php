@@ -31,7 +31,7 @@ $db_password = 'carbonara';
 
 try{
     //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
-    $pdo = new PDO("mysql:host=localhost;dbname=ptitcuisto;charset=utf8",'biscuit' ,'carbonara');
+    $pdo = new PDO("mysql:host=mysql.info.unicaen.fr:3306;dbname=sefriou221_3;charset=utf8",'sefriou221' ,'chei4pi0Eevoopho');
 }
 catch (Exception $e)
 {
@@ -40,48 +40,49 @@ catch (Exception $e)
 
 if(isset($_POST['categorie']) && isset($_POST['auteur'])){
 
-    $categorie = $_POST['categorie'];
+    echo 'tes la?';
 
-    echo 'value: '.$categorie;
+    /*
+    $titre = $_POST['titre'];
+    $categorie = $_POST['categorie'];
+    $resume = $_POST['resume'];
+    $image = $_POST['image'];
+    $auteur = $_POST['auteur'];
+    */
+
+    $titre = "Pizza";
+    $categorie = 'PLAT';
+    $resume = 'Resumé';
+    $image = 'image';
+    $auteur = 'CHOCOVORE';
 
     $sth = $pdo->query('SELECT * FROM recette');
 
     $rows = $sth->fetchAll();
 
-    $titre = 'plat2';
-    $resume= 'resume';
-    $auteur=15;
 
-    $data = [
-        'Titre' => $titre,
-        'Resume' => $resume,
-        'aut_id' => $auteur,
-    ];
+    
 
-    $requete =
-    "Insert Into recette (
-        Titre, 
-        cont_id, 
-        Resume, 
-        cat_id, 
-        Image, 
-        DateCreation, 
-        DateModification, 
-        aut_id) 
-        VALUES 
-        (:Titre,
-        53,
-        :Resume,
-        (Select cat_id from categorie where Intitule='".$categorie."'),
-        'image',
-        now(),
-        now(),
-        (Select user_id from categorie where Pseudo='".$categorie."'))";
+    $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (
+    :titre,
+    53,
+    'resume',
+    (Select cat_id from categorie where Intitule=:categorie),
+    'Image',
+    now(),
+    now(),
+    (Select user_id from utilisateur where Pseudo=:auteur)
+    )";
 
-    //$requete = "insert into recette (Titre) values ('baguette')";
+    //$requete = "insert into test values (:Titre)";
 
     $stmt = $pdo->prepare($requete);
-    $stmt->execute($data);
+    $stmt->bindValue(':titre', $titre);
+    $stmt->bindValue(':categorie', $categorie);
+    //$stmt->bindValue(':resume', $resume);
+    //$stmt->bindValue(':image', $image);
+    $stmt->bindValue(':auteur', $auteur);
+    $stmt->execute();
 }
 ?>
 </body>

@@ -28,46 +28,67 @@
     <div class="formulaireRecette">
         <p>Catégorie</p>
         <select id="cat" name="categorie" size="3">
-            <option>Entrée</option>
-            <option>Plats</option>
-            <option>Dessert</option>
+            <option value='entree'>ENTREE</option>
+            <option value='plats'>PLAT</option>
+            <option value='dessert'>DESSERT</option>
         </select>
     </div>
-<button type="button">Ajouter la recette!</button>
+    <div class="formulaireRecette">
+        <p>Auteur</p>
+        <input type="text" name="auteur">
+    </div>
+    <input type="submit" name="inserer" value='Ajouter la recette!'>
 </form>
-
 <?php
 
-/*$db_host = 'mysql.info.unicaen.fr';
-$db_name = 'sefriou221_bd';
-$db_username = 'sefriou221';
-$db_port = '3306';
-$db_password = 'chei4pi0Eevoopho';*/
-
 $db_host = 'localhost';
-$db_name = 'pticuisto';
+$db_name = 'PtitCuisto';
 $db_username = 'biscuit';
 $db_port = '80';
 $db_password = 'carbonara';
 
 try{
     //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
-    $mysqlConnection = new PDO("mysql:host='localhost';dbname='pticuisto';charset=utf8",'root' ,'root');
+    $pdo = new PDO("mysql:host=mysql.info.unicaen.fr:3306;dbname=sefriou221_3;charset=utf8",'sefriou221' ,'chei4pi0Eevoopho');
 }
 catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
 
-$sth = $mysqlConnection->query('SELECT * FROM recette');
+if(isset($_POST['categorie']) && isset($_POST['auteur']) && isset($_POST['resume']) && isset($_POST['titre']) && isset($_POST['image']) && isset($_POST['inserer'])){
 
-$rows = $sth->fetchAll();
+    echo 'tes la?';
 
-var_dump($rows);
-/*foreach ($rows as $row) {
+    $titre = $_POST['titre'];
+    $categorie = $_POST['categorie'];
+    $resume = $_POST['resume'];
+    $image = $_POST['image'];
+    $auteur = $_POST['auteur'];
 
-    echo ("$row[0] $row[1] $row[2]\n");
-}*/
+    $sth = $pdo->query('SELECT * FROM recette');
+
+    $rows = $sth->fetchAll();
+
+    $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (
+    :titre,
+    53,
+    :resume,
+    (Select cat_id from categorie where Intitule=:categorie),
+    :image,
+    now(),
+    now(),
+    (Select user_id from utilisateur where Pseudo=:auteur)
+    )";
+
+    $stmt = $pdo->prepare($requete);
+    $stmt->bindValue(':titre', $titre);
+    $stmt->bindValue(':categorie', $categorie);
+    $stmt->bindValue(':resume', $resume);
+    $stmt->bindValue(':image', $image);
+    $stmt->bindValue(':auteur', $auteur);
+    $stmt->execute();
+}
 ?>
 </body>
 </html>

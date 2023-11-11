@@ -31,6 +31,8 @@
             die('Erreur : ' . $e->getMessage());
         }
 
+        $valider = false;
+
         if(isset($_POST['filtre']) && (!empty($_POST['caractere']) || !empty($_POST['categorie']) || !empty($_POST['ingredient']))){
 
             $caractere = $_POST['caractere'];
@@ -113,7 +115,7 @@
             
         }else{
 
-            $data = $pdo->query("SELECT * FROM recette")->fetchAll();
+            $data = $pdo->query("SELECT * FROM recette where statut='APROUVE'")->fetchAll();
             $categorie = 'PLAT';
             echo "<div id ='listeRecette'>";
                 echo '<table>';
@@ -153,7 +155,9 @@
                 }
                 echo '<table>';
             echo '</div>';
+        $valider=true;
         }
     ?>
+    
 </body>
 </html>

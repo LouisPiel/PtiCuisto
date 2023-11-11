@@ -60,10 +60,6 @@ if(isset($_POST['categorie']) && isset($_POST['auteur']) && isset($_POST['resume
     $image = $_POST['image'];
     $auteur = $_POST['auteur'];
 
-    $sth = $pdo->query('SELECT * FROM recette');
-
-    $rows = $sth->fetchAll();
-
     $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (
     :titre,
     53,

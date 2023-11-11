@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../CSS/style.css" rel="stylesheet" type="text/css" />
-    <title>Nos Recettes</title>
+    <title>Ajouter une Recettes</title>
 </head>
 <body>
 
@@ -40,36 +40,33 @@
     <input type="submit" name="inserer" value='Ajouter la recette!'>
 </form>
 <?php
-$env = parse_ini_file("../.env");
+    $env = parse_ini_file("../.env");
+    try{
+    
+        $pdo = new PDO("mysql:host=".$env['DATABASE_HOST'].";dbname=".$env['DATABASE_NAME'].";charset=utf8",$env['DATABASE_USER'] ,$env['DATABASE_PASSWORD']);
+    }
+    catch (Exception $e)
+    {
+        die('Erreur : ' . $e->getMessage());
+    }
 
-try{
-   
-    $pdo = new PDO("mysql:host=".$env['DATABASE_HOST'].";dbname=".$env['DATABASE_NAME'].";charset=utf8",$env['DATABASE_USER'] ,$env['DATABASE_PASSWORD']);
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
-if(isset($_POST['categorie']) && isset($_POST['auteur']) && isset($_POST['resume']) && isset($_POST['titre']) && isset($_POST['image']) && isset($_POST['inserer'])){
+    if(!empty($_POST['categorie']) && !empty($_POST['auteur']) && !empty($_POST['resume']) && !empty($_POST['titre']) && !empty($_POST['image']) && isset($_POST['inserer'])){
+        $titre = $_POST['titre'];
+        $categorie = $_POST['categorie'];
+        $resume = $_POST['resume'];
+        $image = $_POST['image'];
+        $auteur = $_POST['auteur'];
 
-    echo 'tes la?';
-
-    $titre = $_POST['titre'];
-    $categorie = $_POST['categorie'];
-    $resume = $_POST['resume'];
-    $image = $_POST['image'];
-    $auteur = $_POST['auteur'];
-
-    $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (
-    :titre,
-    53,
-    :resume,
-    (Select cat_id from categorie where Intitule=:categorie),
-    :image,
-    now(),
-    now(),
-    (Select user_id from utilisateur where Pseudo=:auteur)
-    )";
+        $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (
+        :titre,
+        53,
+        :resume2,
+        (Select cat_id from categorie where Intitule=:categorie),
+        :image2,
+        now(),
+        now(),
+        (Select user_id from utilisateur where Pseudo=:auteur)
+        )";
 
     $stmt = $pdo->prepare($requete);
     $stmt->bindValue(':titre', $titre);
@@ -78,7 +75,7 @@ if(isset($_POST['categorie']) && isset($_POST['auteur']) && isset($_POST['resume
     $stmt->bindValue(':image', $image);
     $stmt->bindValue(':auteur', $auteur);
     $stmt->execute();
-}
+  }
 ?>
 </body>
 </html>

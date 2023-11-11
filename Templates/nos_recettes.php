@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos recettes</title>
-    <link rel="stylesheet" href="./Style/style.css">
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
     <?php 
@@ -51,23 +51,7 @@
     <section id="resultats">
         
     <?php
-        try{    //Connexion à la BDD
-            //$mysqlConnection = new PDO('mysql:host='.$db_host.';port='.$db_port.';dbname='.$db_name.';charset=utf8', $db_username, $db_password);
-
-            $mysqlConnection = new PDO("mysql:host=$db_host:$db_port;dbname=$db_name;charset=utf8",$db_username ,$db_password );
-        }
-        catch (Exception $e)
-        {
-            die('Erreur : ' . $e->getMessage());
-        }
-
-        $sql = $dbh->query('SELECT rec_id FROM recette');   //Récupération des recettes et affichage dans tableau
-        echo "<table>
-        <thead><tr><th colspan=\"2\">Recettes</th></tr></thead><tbody><tr>";
-        foreach ($conn->query($sql) as $row) {
-            echo "<td>$row[0] $row[1] $row[2]</td>";
-        }
-            echo "</tr></tbody></table>";
+        
         ?>
     </section>
     <script src="./Scripts/nos_recettes.js"></script>

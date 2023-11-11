@@ -6,8 +6,6 @@
     <title>Nos Recettes</title>
 </head>
 <body> 
-
-<a href="recette.php?id=53"> link</a>
     <?php
     $env = parse_ini_file("../.env");
 

@@ -37,14 +37,14 @@
     $requete->execute(['id' => $id]);
     $recette = $requete->fetchAll();
     foreach($recette as $row){
-        echo '<p> Nom de la recette: '.$row['Titre'].'</p>';
         echo '<img src="'.$row['Image'].'" alt="Recette" width="300">';
-        echo '<p> Categorie: '.$categorie.'</p>';
-        echo '<p> Description: '.$row['Resume'].'</p>';
+        echo '<h3> Nom de la recette: </h3>'.$row['Titre'].'</p>';
+        echo '<h3> Categorie: </h3> <p>'.$categorie.'</p>';
+        echo '<h3> Description: </h3> <p>'.$row['Resume'].'</p>';
         //echo '<p> Ingredient: '.$row['image'].'</p>';
-        echo '<p> Auteur: '.$auteur.'</p>';
-        echo '<p> Date de Creation: '.$row['DateCreation'].'</p>';
-        echo '<p> Date de Modification: '.$row['DateModification'].'</p>';
+        echo '<h3> Auteur: </h3> <p>'.$auteur.'</p>';
+        echo '<h3> Date de Creation: </h3> <p>'.$row['DateCreation'].'</p>';
+        echo '<h3> Date de Modification: </h3> <p>'.$row['DateModification'].'</p>';
     } 
 ?>   
 </body>

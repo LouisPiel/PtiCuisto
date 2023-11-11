@@ -49,7 +49,7 @@
                     //echo '<td>'.$row['cont_id'].'</td>';
                     echo '<td>'.$row['Resume'].'</td>';
                     echo '<td>'.$categorie.'</td>';
-                    echo '<td>'.$row['Image'].'</td>';
+                    echo '<td><img src="'.$row['Image'].'" alt="Image recette" width="200";height="300"></td>';
                     echo '<td>'.$row['DateCreation'].'</td>';
                     echo '<td>'.$row['DateModification'].'</td>';
                     echo '<td>'.$username.'</td>';

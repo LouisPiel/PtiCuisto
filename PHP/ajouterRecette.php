@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../CSS/style.css" rel="stylesheet" type="text/css" />
-    <title>Nos Recettes</title>
+    <title>Ajouter une Recettes</title>
 </head>
 <body>
 
@@ -28,9 +28,9 @@
     <div class="formulaireRecette">
         <p>Catégorie</p>
         <select id="cat" name="categorie" size="3">
-            <option value='entree'>ENTREE</option>
-            <option value='plats'>PLAT</option>
-            <option value='dessert'>DESSERT</option>
+            <option value='ENTREE'>ENTREE</option>
+            <option value='PLAT'>PLAT</option>
+            <option value='DESSERT'>DESSERT</option>
         </select>
     </div>
     <div class="formulaireRecette">
@@ -40,48 +40,45 @@
     <input type="submit" name="inserer" value='Ajouter la recette!'>
 </form>
 <?php
+    $env = parse_ini_file("../.env");
+    var_dump($env['DATABASE_HOST']);
+    try{
+    
+        $pdo = new PDO("mysql:host=".$env['DATABASE_HOST'].";dbname=".$env['DATABASE_NAME'].";charset=utf8",$env['DATABASE_USER'] ,$env['DATABASE_PASSWORD']);
+    }
+    catch (Exception $e)
+    {
+        die('Erreur : ' . $e->getMessage());
+    }
 
-try{
-   
-    $pdo = new PDO("mysql:host=".$_ENV['DATABASE_HOST'].";dbname=".$_ENV['DATABASE_NAME'].";charset=utf8",$_ENV['DATABASE_NAME'] ,$_ENV['DATABASE_PASSWORD']);
-}
-catch (Exception $e)
-{
-    die('Erreur : ' . $e->getMessage());
-}
-if(isset($_POST['categorie']) && isset($_POST['auteur']) && isset($_POST['resume']) && isset($_POST['titre']) && isset($_POST['image']) && isset($_POST['inserer'])){
+    if(!empty($_POST['categorie']) && !empty($_POST['auteur']) && !empty($_POST['resume']) && !empty($_POST['titre']) && !empty($_POST['image']) && isset($_POST['inserer'])){
 
-    echo 'tes la?';
+        $titre = $_POST['titre'];
+        $categorie = $_POST['categorie'];
+        $resume = $_POST['resume'];
+        $image = $_POST['image'];
+        $auteur = $_POST['auteur'];
 
-    $titre = $_POST['titre'];
-    $categorie = $_POST['categorie'];
-    $resume = $_POST['resume'];
-    $image = $_POST['image'];
-    $auteur = $_POST['auteur'];
+        $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (
+        :titre,
+        53,
+        :resume2,
+        (Select cat_id from categorie where Intitule=:categorie),
+        :image2,
+        now(),
+        now(),
+        (Select user_id from utilisateur where Pseudo=:auteur)
+        )";
 
-    $sth = $pdo->query('SELECT * FROM recette');
+        $stmt = $pdo->prepare($requete);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':categorie', $categorie);
+        $stmt->bindValue(':resume2', $resume);
+        $stmt->bindValue(':image2', $image);
+        $stmt->bindValue(':auteur', $auteur);
+        $stmt->execute();
 
-    $rows = $sth->fetchAll();
-
-    $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id) VALUES (
-    :titre,
-    53,
-    :resume,
-    (Select cat_id from categorie where Intitule=:categorie),
-    :image,
-    now(),
-    now(),
-    (Select user_id from utilisateur where Pseudo=:auteur)
-    )";
-
-    $stmt = $pdo->prepare($requete);
-    $stmt->bindValue(':titre', $titre);
-    $stmt->bindValue(':categorie', $categorie);
-    $stmt->bindValue(':resume', $resume);
-    $stmt->bindValue(':image', $image);
-    $stmt->bindValue(':auteur', $auteur);
-    $stmt->execute();
-}
+    }
 ?>
 </body>
 </html>

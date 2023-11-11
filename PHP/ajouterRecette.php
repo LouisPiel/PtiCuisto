@@ -41,7 +41,6 @@
 </form>
 <?php
     $env = parse_ini_file("../.env");
-    var_dump($env['DATABASE_HOST']);
     try{
     
         $pdo = new PDO("mysql:host=".$env['DATABASE_HOST'].";dbname=".$env['DATABASE_NAME'].";charset=utf8",$env['DATABASE_USER'] ,$env['DATABASE_PASSWORD']);

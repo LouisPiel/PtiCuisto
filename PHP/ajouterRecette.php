@@ -51,7 +51,6 @@
     }
 
     if(!empty($_POST['categorie']) && !empty($_POST['auteur']) && !empty($_POST['resume']) && !empty($_POST['titre']) && !empty($_POST['image']) && isset($_POST['inserer'])){
-
         $titre = $_POST['titre'];
         $categorie = $_POST['categorie'];
         $resume = $_POST['resume'];
@@ -69,15 +68,14 @@
         (Select user_id from utilisateur where Pseudo=:auteur)
         )";
 
-        $stmt = $pdo->prepare($requete);
-        $stmt->bindValue(':titre', $titre);
-        $stmt->bindValue(':categorie', $categorie);
-        $stmt->bindValue(':resume2', $resume);
-        $stmt->bindValue(':image2', $image);
-        $stmt->bindValue(':auteur', $auteur);
-        $stmt->execute();
-
-    }
+    $stmt = $pdo->prepare($requete);
+    $stmt->bindValue(':titre', $titre);
+    $stmt->bindValue(':categorie', $categorie);
+    $stmt->bindValue(':resume', $resume);
+    $stmt->bindValue(':image', $image);
+    $stmt->bindValue(':auteur', $auteur);
+    $stmt->execute();
+  }
 ?>
 </body>
 </html>

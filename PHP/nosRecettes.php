@@ -6,6 +6,8 @@
     <title>Nos Recettes</title>
 </head>
 <body> 
+
+<a href="recette.php?id=53"> link</a>
     <?php
     $env = parse_ini_file("../.env");
 
@@ -45,7 +47,7 @@
                     default: $categorie = 'Boisson'; break;
                     }
                 echo '<tr>';
-                    echo '<td>'.$row['Titre'].'</td>';
+                    echo '<td><a href="recette.php?id='.$row['rec_id'].'">'.$row['Titre'].'</a></td>';
                     //echo '<td>'.$row['cont_id'].'</td>';
                     echo '<td>'.$row['Resume'].'</td>';
                     echo '<td>'.$categorie.'</td>';

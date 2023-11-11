@@ -11,10 +11,10 @@
     <input type="text" name="auteur">
 
     <select id="cat" name="categorie" size="3">
-            <option value='entree'>Entrée</option>
-            <option value='plat'>Plats</option>
+            <option value='ENTREE'>Entrée</option>
+            <option value='PLAT'>Plats</option>
             <option value='dessert'>Dessert</option>
-        </select>
+    </select>
 
     <input type="submit" value="inserer">
     </form>

@@ -42,7 +42,7 @@
         echo '<h3> Categorie: </h3> <p>'.$categorie.'</p>';
         echo '<h3> Description: </h3> <p>'.$row['Resume'].'</p>';
         //echo '<p> Ingredient: '.$row['image'].'</p>';
-        echo '<h3> Auteur: </h3> <p>'.$auteur.'</p>';
+        echo '<h3> Auteur: </h3> <a href="profile.php?id='.$row['aut_id'].'">'.$auteur.'</a>';
         echo '<h3> Date de Creation: </h3> <p>'.$row['DateCreation'].'</p>';
         echo '<h3> Date de Modification: </h3> <p>'.$row['DateModification'].'</p>';
     } 

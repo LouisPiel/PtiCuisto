@@ -28,9 +28,9 @@
     <div class="formulaireRecette">
         <p>Catégorie</p>
         <select id="cat" name="categorie" size="3">
-            <option value='entree'>ENTREE</option>
-            <option value='plats'>PLAT</option>
-            <option value='dessert'>DESSERT</option>
+            <option value='ENTREE'>ENTREE</option>
+            <option value='PLAT'>PLAT</option>
+            <option value='DESSERT'>DESSERT</option>
         </select>
     </div>
     <div class="formulaireRecette">

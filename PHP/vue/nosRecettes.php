@@ -4,36 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="./CSS/style.css">
     <title>Nos Recettes</title>
 </head>
 <body>
-<?php include ('header.php'); ?> 
-    <h2>Filtrer</h2>
-        <form action = "<?php print $_SERVER['PHP_SELF'];?>" method = "post">
-    <p> Filter (caractère) <p>
-        <input type="text" name="caractere">
-    <p> Categorie <p>
-        <select id="cat" name="categorie" size="3">
-                <option value='ENTREE'>Entrée</option>
-                <option value='PLAT'>Plat</option>
-                <option value='DESSERT'>Dessert</option>
-        </select>
-    <p> Ingrédient <p>
-        <input type="text" name="ingredient">
-    <input type=submit name="filtre" value="Filtrer">
-    </form>
+<?php include ('header.php');?>
     <?php
-        $env = parse_ini_file("../.env");
-
-        try{
-            $pdo = new PDO("mysql:host=".$env['DATABASE_HOST'].";dbname=".$env['DATABASE_NAME'].";charset=utf8",$env['DATABASE_USER'] ,$env['DATABASE_PASSWORD']);
-        }
-        catch (Exception $e)
-        {
-            die('Erreur : ' . $e->getMessage());
-        }
-
+        $recMan = new RecetteManager();
+        $pdo = $recMan->connexionBDD();
+        
         $valider = false;
 
         if(isset($_POST['filtre']) && (!empty($_POST['caractere']) || !empty($_POST['categorie']) || !empty($_POST['ingredient']))){

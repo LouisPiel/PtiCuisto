@@ -1,4 +1,127 @@
-<!DOCTYPE html>
+<?php
+
+    session_start();
+
+    require('PHP/controleur/Autoloader.php');
+    Autoloader::register();
+
+    try {
+        if (isset($_GET['action'])) {
+            
+            if ($_GET['action'] == 'listeRecettes') {
+                $blog = new Blog();
+                $blog->listeRecettes();
+            }
+            
+            elseif ($_GET['action'] == 'accueil') {
+                $blog = new Blog();
+                $blog->accueil();
+            }
+            
+            elseif ($_GET['action'] == 'recette') {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $blog = new Blog();
+                    $blog->recette();
+                }
+                else {
+                    throw new Exception ('Aucun identifiant de billet envoyé');
+                }
+            }
+    /*
+            // Administrateur
+            elseif ($_GET['action'] == 'listeRecettesAdmin') {
+                $admin = new Admin();
+                $admin->listeRecettesAdmin();
+            }*/
+    
+            if ($_GET['action'] == 'vueAjouterRecette') {
+                $admin = new Admin();
+                $admin->viewAjouterRecette();
+            }
+            
+            elseif ($_GET['action'] == 'ajouterRecette') {
+                if (!empty($_SESSION['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
+                    $admin = new Admin();
+                    $admin->addRecette($_SESSION['id'], $_POST['title'], $_POST['content']);
+                }
+                else {
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            }
+    
+            elseif ($_GET['action'] == 'viewEditRecette') {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $admin = new Admin();
+                    $admin->viewEditRecette();
+                }
+                else {
+                    throw new Exception ('Aucun identifiant de billet envoyé');
+                }
+            }
+    
+            elseif ($_GET['action'] == 'modifierRecette') {
+                if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                    $admin = new Admin();
+                    $admin->modifierRecette($_GET['id'], $_POST['title'], $_POST['content']);
+                }
+                else {
+                    throw new Exeption('Tous les champs ne sont pas remplis !');
+                }
+            }
+    
+            elseif ($_GET['action'] == 'supprimerRecette') {
+                $admin = new Admin();
+                $admin->supprimerRecette($_GET['id']);
+            }
+    
+            // Utilisateurs
+            if ($_GET['action'] == 'connexion') {
+                $utilisateur = new Utilisateur();
+                $utilisateur->connexion();
+            }
+    
+            elseif ($_GET['action']== 'connexionUser') {
+                if (isset($_POST['pseudo']) && isset($_POST['pass'])) {
+                    $utilisateur = new Utilisateur();
+                    $utilisateur->connexionUser($_POST['pseudo'], $_POST['pass']);
+                    
+                }
+                else {
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            }
+    
+            if ($_GET['action'] == 'registration') {
+                $utilisateur = new Utilisateur();
+                $utilisateur->registration();
+            }
+    
+            elseif ($_GET['action'] == 'saveUser') {
+                if (isset($_POST['pseudo']) && isset($_POST['pass']) && isset($_POST['email'])) {
+                    $utilisateur = new Utilisateur();
+                    $utilisateur->saveUser($_POST['pseudo'], $_POST['pass'], $_POST['email']);
+                }
+                else {
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                }
+            }
+    
+            elseif ($_GET['action'] == 'deconnexion') {
+                $utilisateur = new Utilisateur();
+                $utilisateur->deconnexion();
+            }
+            
+        }
+        else {
+            $blog = new Blog();
+            $blog->listeRecettes();   
+        }
+    }
+    catch(Exception $e) {
+        echo 'Erreur : ' . $e->getMessage();
+    }
+?>
+<!--<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -47,6 +170,6 @@
             <a href="https://x.com"><span class="fa-brands fa-square-x-twitter fa-2xl icon-foot"></span></a>
             <a href="https://linkedin.com"><span class="fa-brands fa-linkedin fa-2xl icon-foot" style="color: #008080;"></span></a>
       </div>'
-    
-</body>
+    </body>
 </html>
+       -->

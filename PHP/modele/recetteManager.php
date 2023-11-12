@@ -1,6 +1,5 @@
 <?php
-    require_once("model/Manager.php");
-    //TO DO : Vérifier les colonnes de la BDD
+    require_once("PHP/modele/Manager.php");
 
     class RecetteManager extends Manager
     {
@@ -8,13 +7,22 @@
         public function getRecettes()
         {            
             //Récupération des recettes et affichage dans tableau
-            $sql = $mysqlConnection->query('SELECT rec_id FROM recette');   
+            $db = $this->connexionBDD();
+            $sql = $db->query('SELECT rec_id FROM recette');   
             echo "<table>
-            <thead><tr><th colspan=\"2\">Recettes</th></tr></thead><tbody><tr>";
+                    <thead>
+                        <tr>
+                            <th colspan=\"2\">Recettes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>";
             foreach ($sql as $row) {
                 echo "<td>$row[0] $row[1] $row[2]</td>";
             }
-                echo "</tr></tbody></table>";
+                echo "</tr>
+                    </tbody>
+                </table>";
 
             return $req;
         }

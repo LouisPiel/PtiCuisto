@@ -9,11 +9,13 @@
 
         // Classe à charger 
         static function autoload($class) {
-            if (file_exists('controleur/' . $class . '.php')) {
-                require 'controleur/' . $class . '.php';
+            //echo 'PHP/controleur/' . $class . '.php';
+            if (file_exists('PHP/controleur/' . $class . '.php')) {
+                //echo '<br>';
+                require 'PHP/controleur/' . $class . '.php';
             }
-            elseif (file_exists('modele/' . $class . '.php')) {
-                require 'modele/' . $class . '.php';
+            elseif (file_exists('PHP/modele/' . $class . '.php')) {
+                require 'PHP/modele/' . $class . '.php';
             }
         }
     }

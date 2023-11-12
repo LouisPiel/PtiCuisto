@@ -39,11 +39,19 @@
         $requete->execute(['id' => $id]);
         $recette = $requete->fetchAll();
         foreach($recette as $row){
+            $ingredient = $pdo->prepare('SELECT Contenu from contenu where cont_id=:contid');
+                        $ingredient->bindValue('contid', $row['cont_id']);
+                        $ingredient->execute();
+                        $ingData = $ingredient->fetchAll();
+                        foreach($ingData as $row2){
+                            $contenu = $row2['Contenu'];
+                        }
+
             echo '<img src="'.$row['Image'].'" alt="Recette" width="300">';
             echo '<h3> Nom de la recette: </h3>'.$row['Titre'].'</p>';
             echo '<h3> Categorie: </h3> <p>'.$categorie.'</p>';
             echo '<h3> Description: </h3> <p>'.$row['Resume'].'</p>';
-            //echo '<p> Ingredient: '.$row['image'].'</p>';
+            echo '<h3> Ingredient: </h3> <p>'.$contenu.'</p>';
             echo '<h3> Auteur: </h3> <a href="profile.php?id='.$row['aut_id'].'">'.$auteur.'</a>';
             echo '<h3> Date de Creation: </h3> <p>'.$row['DateCreation'].'</p>';
             echo '<h3> Date de Modification: </h3> <p>'.$row['DateModification'].'</p>';

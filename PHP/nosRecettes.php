@@ -92,12 +92,12 @@
                             $username = $row2;
                         }
 
-                        $ingredient = $pdo->prepare('SELECT contenu from contenu where cont_id=:contid');
+                        $ingredient = $pdo->prepare('SELECT Contenu from contenu where cont_id=:contid');
                         $ingredient->bindValue('contid', $row['cont_id']);
                         $ingredient->execute();
                         $ingData = $requete->fetchAll();
-                        foreach($ingData as $row){
-                            $contenu = $row['Contenu'];
+                        foreach($ingData as $row2){
+                            $contenu = $row2['Contenu'];
                         }
             
                         switch($row['cat_id']){
@@ -128,8 +128,7 @@
                 echo '<table>';
                     echo '<tr>';
                         echo '<th> Titre de la recette </th>';
-                        //echo '<th> Titre de la recette </th>';
-                        echo '<th> Description </th>';
+                        echo '<th> Ingrédients </th>';
                         echo '<th> Categorie </th>';
                         echo '<th> Image </th>';
                         echo '<th> Date de création </th>';
@@ -143,6 +142,15 @@
                         foreach($user as $row2){
                             $username = $row2;
                         }
+
+                        $ingredient = $pdo->prepare('SELECT Contenu from contenu where cont_id=:contid');
+                        $ingredient->bindValue('contid', $row['cont_id']);
+                        $ingredient->execute();
+                        $ingData = $ingredient->fetchAll();
+                        foreach($ingData as $row2){
+                            $contenu = $row2['Contenu'];
+                        }
+
                         switch($row['cat_id']){
                             case 0: $categorie = 'Entrée'; break;
                             case 1: $categorie = 'Plat'; break;
@@ -151,8 +159,7 @@
                             }
                         echo '<tr>';
                             echo '<td><a href="recette.php?id='.$row['rec_id'].'">'.$row['Titre'].'</a></td>';
-                            //echo '<td>'.$row['cont_id'].'</td>';
-                            echo '<td>'.$row['Resume'].'</td>';
+                            echo '<td>'.$contenu.'</td>';
                             echo '<td>'.$categorie.'</td>';
                             echo '<td><img src="'.$row['Image'].'" alt="Image recette" width="200";height="300"></td>';
                             echo '<td>'.$row['DateCreation'].'</td>';

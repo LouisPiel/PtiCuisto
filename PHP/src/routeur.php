@@ -1,6 +1,7 @@
 <?php
 
     class Router {
+        //Inutilisé pour l'instant
         protected $routes = [];
 
         public function addRoute($route, $controller, $action) {

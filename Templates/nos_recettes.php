@@ -10,7 +10,7 @@
     <?php 
         require('src/model.php');
     ?>
-
+    <!--ATTENTION ! Inutilisé. Reste de construction antérieure. A fenêtres modales-->
     <!--Il faut que chaque filtre ajoute un tag qui limite la recherche-->
     <!--Fenêtres modales-->
     <div id="modaleNom" class="modal" aria-modal="true" aria-labelledby="modal-heading">

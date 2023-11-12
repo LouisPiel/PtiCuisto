@@ -4,11 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="./CSS/style.css">
     <title>Nos Recettes</title>
 </head>
 <body>
-<?php include ('header.php'); ?> 
+<?php include ('header.php');?> 
+<!--Fenêtres modales
+<div id="modaleNom" class="modal" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="modal-heading">Filtre nom</h1>
+            <input name="filtre_nom" id="filtre_nom" class="filtre"></input>
+            <button id="button_ajouter_nom">Ajouter</button>            
+        </div>            
+    </div>
+    <div id="modaleCategorie" class="modal" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="modal-heading">Filtre ingredient</h1>
+            <select name="filtre_categorie" id="filtre_categorie" class="filtre">
+                <option value="">---Choisir un ingrédient---</option>
+                <option value="Entrée">Entrée</option>
+                <option value="Plat principal">Plat principal</option>
+                <option value="Dessert">Dessert</option>
+            </select>
+            <button id="button_ajouter_categorie">Ajouter</button>
+        </div>        
+    </div>
+    <div id="modaleIngredient" class="modal" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="modal-heading">Filtre Ingredient</h1>
+            <input name="filtre_ingredient" id="filtre_ingredient" class="filtre"></input>
+            <button id="button_ajouter_ingredient">Ajouter</button>
+        </div>    
+    </div>
+    <section id="bandeau_filtres">
+        <p>Filtres</p>
+        <button id="button_filtre_nom" class="bt_filtre">Nom</button> 
+        <button id="button_filtre_categorie" class="bt_filtre">Categorie</button> 
+        <button id="button_filtre_ingredient" class="bt_filtre">Ingredients</button>   
+    </section>
+    <section id="resultats"> -->
     <h2>Filtrer</h2>
         <form action = "<?php print $_SERVER['PHP_SELF'];?>" method = "post">
     <p> Filter (caractère) <p>
@@ -24,16 +61,9 @@
     <input type=submit name="filtre" value="Filtrer">
     </form>
     <?php
-        $env = parse_ini_file("../.env");
-
-        try{
-            $pdo = new PDO("mysql:host=".$env['DATABASE_HOST'].";dbname=".$env['DATABASE_NAME'].";charset=utf8",$env['DATABASE_USER'] ,$env['DATABASE_PASSWORD']);
-        }
-        catch (Exception $e)
-        {
-            die('Erreur : ' . $e->getMessage());
-        }
-
+        $recMan = new RecetteManager();
+        $pdo = $recMan->connexionBDD();
+        
         $valider = false;
 
         if(isset($_POST['filtre']) && (!empty($_POST['caractere']) || !empty($_POST['categorie']) || !empty($_POST['ingredient']))){

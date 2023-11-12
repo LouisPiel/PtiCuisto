@@ -5,6 +5,7 @@
 
 body{
   min-width: 353px;
+  background-color: white;
 }
 
 /*NAVBAR*/
@@ -24,7 +25,8 @@ header{
 
 
 a:link, a:visited, a:active, a:focus, a{
-    color : #ffffff;
+    color : midnightblue;
+    font-weight: bold;
 }
 
 ul.dropdown-menu{
@@ -46,6 +48,12 @@ hr.dropdown-divider{
 
 /*ACCEUIL*/
 
+table,tr{
+  text-align: center;
+  border:1px solid black;
+  width: 100%;
+}
+
 #image-acceuil{
   margin-top: 3em;
   display: block;
@@ -57,15 +65,15 @@ hr.dropdown-divider{
 
 #container{
   width: 100vi;
+  margin: 25px;
   display:inline-flex;
   justify-content: space-evenly;
 }
 
 #derniereRecettes{
-  border: solid  1px #999999 ;
   margin-top :2em;
-  width: 30vi;
-  height: 60vh;
+  width: 70%;
+  height: 30vi;
 }
 
 h1{

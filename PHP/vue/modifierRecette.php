@@ -25,6 +25,13 @@
         $titre = $row['Titre'];
         $image = $row['Image'];
         $resume = $row['Resume'];
+
+        $selectIngredients = $pdo->prepare("SELECT Contenu from contenu where cont_id=:contid");
+        $selectIngredients->execute(['contid' => $row['cont_id']]);
+        $ing = $selectIngredients->fetch();
+        foreach($ing as $row3){
+            $contenu = $row3;
+        }
     }
 
 ?>
@@ -35,7 +42,7 @@
     </div>
     <div class="formulaireRecette">
         <p>Contenu</p>
-        <textarea id ="contenu" rows="10" cols="40" name="contenu">Contenu</textarea>
+        <textarea id ="contenu" rows="10" cols="40" name="contenu"><?php echo $contenu; ?></textarea>
     </div>
     <div class="formulaireRecette">
         <p>Résumé</p>
@@ -62,10 +69,26 @@
         $categorie = $_POST['categorie'];
         $resume = $_POST['resume'];
         $image = $_POST['image'];
+        $contenu = $_POST['contenu'];
+
+        $selectAuteur = $pdo->prepare("SELECT cont_id from recette where rec_id=:recid");
+        $selectAuteur->execute(['recid' => $id]);
+        $ing = $selectAuteur->fetch();
+        foreach($ing as $row2){
+            $contid = $row2;
+        }
+
+        $requete = "UPDATE contenu  SET
+                Contenu = :contenu
+                WHERE cont_id=:contid
+                ";
+        $data = $pdo->prepare($requete);
+        $data->bindValue(':contenu', $contenu);
+        $data->bindValue(':contid', $contid);
+        $data->execute();
         
         $requete = "UPDATE recette SET 
         Titre=:titre,
-        cont_id=53,
         Resume=:resume2,
         cat_id=:categorie,
         Image=:image2,
@@ -84,7 +107,7 @@
         echo '<script type="text/javascript">
             var result = confirm("Etes vous sûr?");
             if(result == true){
-                location.href = "PageValidation/ValiderAjouterRecetteIngredient.php?p=rec_modif&id='.$id.'";
+                location.href = "PagesValidation/ValiderAjouterRecetteIngredient.php?p=rec_modif&id='.$id.'";
             }
             </script>';
   }

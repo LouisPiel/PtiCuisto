@@ -20,12 +20,14 @@
         $data = $pdo->query("SELECT * FROM recette where statut='MODERATION'")->fetchAll();
         $categorie = 'PLAT';
         $rec_id = '';
+        $contenu = '?';
         echo "<div id ='listeRecette'>";
             echo '<table>';
                 echo '<tr>';
                     echo '<th> Titre de la recette </th>';
                     //echo '<th> Titre de la recette </th>';
-                    echo '<th> Description </th>';
+                    echo '<th> Ingrédients </th>';
+                    echo '<th> Résumé </th>';
                     echo '<th> Categorie </th>';
                     echo '<th> Image </th>';
                     echo '<th> Date de création </th>';
@@ -45,9 +47,15 @@
                         case 2: $categorie = 'Dessert'; break; 
                         default: $categorie = 'Boisson'; break;
                         }
+                    $selectIngredients = $pdo->prepare("SELECT Contenu from contenu where cont_id=:contid");
+                    $selectIngredients->execute(['contid' => $row['cont_id']]);
+                    $ing = $selectIngredients->fetch();
+                    foreach($ing as $row3){
+                        $contenu = $row3;
+                    }
                     echo '<tr>';
                         echo '<td><a href="recette.php?id='.$row['rec_id'].'">'.$row['Titre'].'</a></td>';
-                        //echo '<td>'.$row['cont_id'].'</td>';
+                        echo '<td>'.$contenu.'</td>';
                         echo '<td>'.$row['Resume'].'</td>';
                         echo '<td>'.$categorie.'</td>';
                         echo '<td><img src="'.$row['Image'].'" alt="Image recette" width="200";height="300"></td>';
@@ -55,7 +63,8 @@
                         echo '<td>'.$row['DateModification'].'</td>';
                         echo '<td>'.$username.'</td>';
                     echo '<form action ="recetteEnAttente.php" method = "post">';
-                        echo '<td><input type="submit" name="approuver" value="Valider" onclick="validerFunct()"><td>';
+                        echo '<td><input type="submit" name="approuver" value="Valider"><td>';
+                        echo '<td><input type="submit" name="rejeter" value="Rejeter"><td>';
                     echo '</form>';
                     echo '</tr>';
                     $id = $row['rec_id'];
@@ -65,7 +74,15 @@
                 $data = $pdo->prepare($requete);
                 $data->bindValue('id', $id);
                 $data->execute();
-                echo '<script> window.location.reload(); </script>';
+                echo '<script> location.href="recetteEnAttente.php"; </script>';
+            }
+
+            if(isset($_POST['rejeter'])){
+                $requete = "UPDATE recette SET statut='REJETE' WHERE rec_id =:id";
+                $data = $pdo->prepare($requete);
+                $data->bindValue('id', $id);
+                $data->execute();
+                echo '<script> location.href="recetteEnAttente.php"; </script>';
             }
             echo '<table>';
         echo '</div>';

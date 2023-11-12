@@ -1,5 +1,20 @@
 <?php
-    session_start()
+
+    session_start();
+    /*
+    echo getcwd(). "<br>";
+    $dirPath = "PHP/controleur";
+    $files = scandir($dirPath);  
+    foreach ($files as $file) {
+        $filePath = $dirPath . '/' . $file;
+        if (is_file($filePath)) {
+            echo $file . "<br>";
+        }
+    }*/
+
+    require('PHP/controleur/autoloader.php'); 
+    Autoloader::register(); 
+
     try {
         if (isset($_GET['action'])) {
             

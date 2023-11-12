@@ -55,7 +55,8 @@
                         echo '<td>'.$row['DateModification'].'</td>';
                         echo '<td>'.$username.'</td>';
                     echo '<form action ="recetteEnAttente.php" method = "post">';
-                        echo '<td><input type="submit" name="approuver" value="Valider" onclick="validerFunct()"><td>';
+                        echo '<td><input type="submit" name="approuver" value="Valider"><td>';
+                        echo '<td><input type="submit" name="rejeter" value="Rejeter"><td>';
                     echo '</form>';
                     echo '</tr>';
                     $id = $row['rec_id'];
@@ -65,7 +66,15 @@
                 $data = $pdo->prepare($requete);
                 $data->bindValue('id', $id);
                 $data->execute();
-                echo '<script> window.location.reload(); </script>';
+                echo '<script> location.href="recetteEnAttente.php"; </script>';
+            }
+
+            if(isset($_POST['rejeter'])){
+                $requete = "UPDATE recette SET statut='REJETE' WHERE rec_id =:id";
+                $data = $pdo->prepare($requete);
+                $data->bindValue('id', $id);
+                $data->execute();
+                echo '<script> location.href="recetteEnAttente.php"; </script>';
             }
             echo '<table>';
         echo '</div>';

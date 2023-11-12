@@ -15,6 +15,7 @@ class Blog
     public function accueil()
     {
         $recetteManager = new recetteManager(); 
+        echo 'accueil';
 
         $posts = $recetteManager->accueil();
         require('./PHP/vue/accueil.php');

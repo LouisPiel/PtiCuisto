@@ -1,13 +1,14 @@
 <?php
 
 
-    enum TypeUtilisateur
-    {
-        case UTILISATEUR;
-        case EDITEUR;
-        case ADMINISTRATEUR;
-    }
     class Utilisateur{
+        
+        enum TypeUtilisateur
+        {
+            case UTILISATEUR;
+            case EDITEUR;
+            case ADMINISTRATEUR;
+        }
         //public static $idcount = 0;  TO DO : Trouver comment incr l'id
         public $id;
         public $pseudo;
@@ -18,7 +19,7 @@
         public $status; //utilisateur, editeur,  admin
         public $type;   //actif ou suspendu
 
-        public function __construct($pseudo, $email, $prenom, $nom, $type) {
+        public function __construct($pseudo, $email, $prenom, $nom, TypeUtilisateur $type) {
             //$this->id = $;
             $this->email = $email;
             $this->pseudo = $pseudo;

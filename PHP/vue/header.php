@@ -1,5 +1,51 @@
 <?php
-echo '<header>';
+echo '<header>'; 
+//Fenêtres modales
+echo
+'   <div id="modaleNom" class="modal" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="modal-heading">Filtre nom</h1>
+            <input name="filtre_nom" id="filtre_nom" class="filtre"></input>
+            <button id="button_ajouter_nom">Ajouter</button>            
+        </div>            
+    </div>
+    <div id="modaleCategorie" class="modal" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="modal-heading">Filtre ingredient</h1>
+            <select name="filtre_categorie" id="filtre_categorie" class="filtre">
+                <option value="">---Choisir un ingrédient---</option>
+                <option value="Entrée">Entrée</option>
+                <option value="Plat principal">Plat principal</option>
+                <option value="Dessert">Dessert</option>
+            </select>
+            <button id="button_ajouter_categorie">Ajouter</button>
+        </div>        
+    </div>
+    <div id="modaleIngredient" class="modal" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="modal-heading">Filtre Ingredient</h1>
+            <input name="filtre_ingredient" id="filtre_ingredient" class="filtre"></input>
+            <button id="button_ajouter_ingredient">Ajouter</button>
+        </div>    
+    </div>';
+    /*
+    <h2>Filtrer</h2>
+        <form action = "<?php// print $_SERVER['PHP_SELF'];?>" method = "post">
+    <p> Filtre <p>
+        <input type="text" name="caractere">
+    <p> Categorie <p>
+        <select id="cat" name="categorie" size="3">
+                <option value='ENTREE'>Entrée</option>
+                <option value='PLAT'>Plat</option>
+                <option value='DESSERT'>Dessert</option>
+        </select>
+    <p> Ingrédient <p>
+        <input type="text" name="ingredient">
+    <input type=submit name="filtre" value="Filtrer">
+    </form>;*/
 
 echo '  <nav class="navbar navbar-expand-lg ">
             <a class="navbar-brand" href="#"> 

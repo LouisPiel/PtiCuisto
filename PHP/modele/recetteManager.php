@@ -8,7 +8,7 @@
         {            
             //Récupération des recettes
             $db = $this->connexionBDD();
-            $req = $db->query('SELECT rec_id, titre, resume, image, datecreation, datemodification FROM recette');   
+            $req = $db->query('SELECT * FROM recette');   
             /*echo "<table>
                     <thead>
                         <tr>

@@ -62,6 +62,7 @@
                                     echo '<td><img src="'.$row['Image'].'" alt="Image recette" width="200";height="300"></td>';
                                     echo '<td>'.$row['DateCreation'].'</td>';
                                     echo '<td>'.$row['DateModification'].'</td>';
+                                    echo '<td>'.$username.'</td>';
                                 }
                                 echo '<table>';
                             echo '</div>';

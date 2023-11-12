@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Demande en cours</title>
 </head>
 <body>
     <h1> Votre demande à bien été prise en compte! </h1>
@@ -12,12 +12,17 @@
 
     <?php
         $id = $_GET['id'];
+        $p = $_GET['p'];
         
-        if($id == 'rec'){
+        if($p == 'rec'){
             echo "<button onclick=\"location.href='../ajouterRecette.php';\"> Retour à l'ajout d'une recette </button>";
         }
 
-        if($id == 'ing'){
+        if($p == 'rec_modif'){
+            echo "<button onclick=\"location.href='../modifierRecette.php?id=".$id."';\"> Retour aux Modification </button>";
+        }
+
+        if($p == 'ing'){
             //echo "<button onclick=\"location.href='../ajouterRecette.php';\"> Retour à l'ajout d'une recette </button>";
         }
     ?>

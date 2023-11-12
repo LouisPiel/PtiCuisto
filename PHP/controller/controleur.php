@@ -1,5 +1,4 @@
 <?php
-
     require_once("Modeles/utilisateur.php");
 
     enum TypeUtilisateur

@@ -46,7 +46,7 @@ catch (Exception $e)
 
     echo '<script type="text/javascript">
             if(window.result == true){
-                location.href = "PageValidation/ValidationSuppression.php?p=rec_modif";
+                location.href = "PagesValidation/ValidationSuppression.php?p=rec_modif";
             }
         </script>';
 ?>

@@ -9,7 +9,7 @@
     <script type="text/javascript">
         function valider(){
             console.log("ca marche");
-            location.href = "PagesValidation/ValiderAjouterRecetteIngredient.php?p=rec&id";
+            location.href = "PageValidation/ValiderAjouterRecetteIngredient.php?p=rec&id";
         }
     </script>
 </head>

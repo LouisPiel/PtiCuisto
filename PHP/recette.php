@@ -7,7 +7,6 @@
 </head>
 <body>
 <?php include ('header.php'); ?> 
-<?php include ('footer.php'); ?>
 <?php
     $env = parse_ini_file("../.env");
     try{
@@ -50,6 +49,7 @@
 
         echo '<a href="modifierRecette.php?id='.$row['rec_id'].'"> Modifier </a> <a href="supprimerRecette.php?id='.$row['rec_id'].'"> Supprimer </a>';
     } 
-?>   
+?>
+<?php include ('footer.php'); ?>
 </body>
 </html>

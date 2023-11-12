@@ -7,9 +7,9 @@
         case EDITEUR;
         case ADMINISTRATEUR;
     }
-    class Utilisateur {
+    class Utilisateur{
         //public static $idcount = 0;  TO DO : Trouver comment incr l'id
-        //public $id;
+        public $id;
         public $pseudo;
         public $email;
         public $prenom;

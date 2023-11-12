@@ -1,0 +1,65 @@
+<?php
+    require_once("model/Manager.php");
+    //TO DO : Vérifier les colonnes de la BDD
+
+    class RecetteManager extends Manager
+    {
+        // Requête pour afficher les recettes
+        public function getRecettes()
+        {            
+            //Récupération des recettes et affichage dans tableau
+            $sql = $mysqlConnection->query('SELECT rec_id FROM recette');   
+            echo "<table>
+            <thead><tr><th colspan=\"2\">Recettes</th></tr></thead><tbody><tr>";
+            foreach ($sql as $row) {
+                echo "<td>$row[0] $row[1] $row[2]</td>";
+            }
+                echo "</tr></tbody></table>";
+
+            return $req;
+        }
+
+        // Requête pour afficher une recette
+        public function getRecette($recetteId)
+        {
+            $db = $this->dbConnect();
+            $req = $db->prepare('SELECT rec_id, Titre, Resume 
+            FROM recette
+            WHERE rec_id = ?');
+            $req->execute(array($recetteId));
+            $recette = $req->fetch();
+
+            return $recette;
+        }
+
+        // Requête pour ajouter une recette
+        public function newRecette($id, $titre, $resume)
+        {
+            $db = $this->dbConnect();
+            $posts = $db->prepare('INSERT INTO recette(rec_id, user_id, resume, date_creation)
+            VALUES(?, ?, ?, NOW())');
+            $posts->execute(array($titre, $id, $resume));
+        
+            return $db->lastInsertId();
+        }
+
+        // Requête pour modifier une recette
+        public function updateRecette($id, $titre, $resume)
+        {
+            $db = $this->dbConnect();
+            $posts = $db->prepare('UPDATE recette SET title = ?, resume= ? WHERE id = ?');
+            $posts->execute(array($titre, $resume, $id));
+        }
+
+        // Requête pour supprimer une recette
+        public function deletePost($id)
+        {
+            $db = $this->dbConnect();
+            $req = $db->prepare('DELETE FROM recette WHERE id = ?');
+            $deletedLines = $req->execute(array($id));
+
+            return $deletedLines;
+        }
+
+    }
+?>

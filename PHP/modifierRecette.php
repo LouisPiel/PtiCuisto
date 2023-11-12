@@ -69,6 +69,23 @@
         $categorie = $_POST['categorie'];
         $resume = $_POST['resume'];
         $image = $_POST['image'];
+        $contenu = $_POST['contenu'];
+
+        $selectAuteur = $pdo->prepare("SELECT cont_id from recette where rec_id=:recid");
+        $selectAuteur->execute(['recid' => $id]);
+        $ing = $selectAuteur->fetch();
+        foreach($ing as $row2){
+            $contid = $row2;
+        }
+
+        $requete = "UPDATE contenu  SET
+                Contenu = :contenu
+                WHERE cont_id=:contid
+                ";
+        $data = $pdo->prepare($requete);
+        $data->bindValue(':contenu', $contenu);
+        $data->bindValue(':contid', $contid);
+        $data->execute();
         
         $requete = "UPDATE recette SET 
         Titre=:titre,

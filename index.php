@@ -13,6 +13,11 @@
                 $blog->listeRecettes();
             }
             
+            elseif ($_GET['action'] == 'accueil') {
+                $blog = new Blog();
+                $blog->accueil();
+            }
+            
             elseif ($_GET['action'] == 'recette') {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
                     $blog = new Blog();
@@ -22,19 +27,19 @@
                     throw new Exception ('Aucun identifiant de billet envoyé');
                 }
             }
-    
+    /*
             // Administrateur
             elseif ($_GET['action'] == 'listeRecettesAdmin') {
                 $admin = new Admin();
                 $admin->listeRecettesAdmin();
-            }
+            }*/
     
-            if ($_GET['action'] == 'viewAjouterRecette') {
+            if ($_GET['action'] == 'vueAjouterRecette') {
                 $admin = new Admin();
                 $admin->viewAjouterRecette();
             }
             
-            elseif ($_GET['action'] == 'addRecette') {
+            elseif ($_GET['action'] == 'ajouterRecette') {
                 if (!empty($_SESSION['id']) && !empty($_POST['title']) && !empty($_POST['content'])) {
                     $admin = new Admin();
                     $admin->addRecette($_SESSION['id'], $_POST['title'], $_POST['content']);

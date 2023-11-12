@@ -33,11 +33,25 @@
             return $req;
         }
 
+        // Requête pour afficher l'accueil
+        public function accueil($recetteId)
+        {
+            $db = $this->dbConnect();
+            $req = $db->prepare('SELECT rec_id, Titre, Resume 
+            FROM recette
+            ORDER BY rec_id DESC
+            LIMIT 4');
+            $req->execute(array($recetteId));
+            $recette = $req->fetch();
+
+            return $recette;
+        }
+
         // Requête pour afficher une recette
         public function getRecette($recetteId)
         {
             $db = $this->dbConnect();
-            $req = $db->prepare('SELECT rec_id, Titre, Resume 
+            $req = $db->prepare('SELECT *
             FROM recette
             WHERE rec_id = ?');
             $req->execute(array($recetteId));

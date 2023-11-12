@@ -45,10 +45,10 @@
         <button id="button_filtre_categorie" class="bt_filtre">Categorie</button> 
         <button id="button_filtre_ingredient" class="bt_filtre">Ingredients</button>   
     </section>
-    <section id="resultats"> -->
+    <section id="resultats">
     <h2>Filtrer</h2>
-        <form action = "<?php print $_SERVER['PHP_SELF'];?>" method = "post">
-    <p> Filter (caractère) <p>
+        <form action = "<?php// print $_SERVER['PHP_SELF'];?>" method = "post">
+    <p> Filtre <p>
         <input type="text" name="caractere">
     <p> Categorie <p>
         <select id="cat" name="categorie" size="3">
@@ -59,7 +59,7 @@
     <p> Ingrédient <p>
         <input type="text" name="ingredient">
     <input type=submit name="filtre" value="Filtrer">
-    </form>
+    </form> -->
     <?php
         $recMan = new RecetteManager();
         $pdo = $recMan->connexionBDD();

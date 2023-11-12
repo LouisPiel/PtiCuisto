@@ -71,6 +71,19 @@ hr.dropdown-divider{
 h1{
   text-align: center;
   color: #2d3990;
+} 
+
+table, tr, th, td {
+    border: 1px solid;
+    padding-right: 10px;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+
 }
 
 #image-edito{
@@ -156,5 +169,5 @@ footer{
       display: block;
       text-align: left;
     }
-  } 
+  }
 

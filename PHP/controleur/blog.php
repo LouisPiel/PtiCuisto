@@ -12,17 +12,27 @@ class Blog
 
     
     // Méthode pour afficher une recette
+    public function accueil()
+    {
+        $recetteManager = new recetteManager(); 
+
+        $posts = $recetteManager->accueil();
+        require('./PHP/vue/accueil.php');
+    }
+
+    
+    // Méthode pour afficher une recette
     public function recette()
     {
         $recetteManager = new recetteManager(); 
 
         $posts = $recetteManager->getRecette($_GET['id']);
         
-        if(!$posts) { // Sécurité si le chapitre n'existe pas redirection vers la page d'accueil
+        if(!$posts) { // Sécurité si le chapitre n'existe pas redirection vers la liste de recettes
             header('Location: index.php?action=listeRecettes');
         }
 
-        require('vue/recette.php');
+        require('./PHP/vue/recette.php');
     }
 
      // Méthode / accès page ajout commentaire
@@ -67,7 +77,7 @@ class Blog
              $recette = $recetteManager->getRecette($_GET['id']); 
              
              if (($_SESSION['id']) == ($recette['aut_id']) || $_SESSION['admin'] == true) { // Sécurité bouton modifié uniquement visible par l'administrateur et le membre qui à posté le commentaire
-                 require('view/frontend/modifierRecette.php');
+                 require('./PHP/vue/modifierRecette.php');
              }
          }
      }
@@ -85,18 +95,18 @@ class Blog
              $oldRecette = $recetteManager->getRecette($id); 
              
              if(!$oldRecette) { // Sécurité si le commentaire n'existe pas ou que le membre n'est pas l'auteur redirection vers la page d'accueil
-                 header('Location: index.php?action=listPostsView');
+                 header('Location: index.php?action=listeRecettes');
              }
              
              if (($_SESSION['id']) == ($oldRecette['user_id']) || $_SESSION['admin'] == true) { // Sécurité bouton modifié uniquement visible par l'administrateur et le membre qui à posté le commentaire 
-                 $newRecette = $recetteManager->updateRecette($id, $comment);
+                 $newRecette = $recetteManager->updateRecette($id, $resume);
                          
                  if ($newRecette == false) {
-                     throw new Exeption('Impossible de modifier le commentaire !');
+                     throw new Exception('Impossible de modifier le commentaire !');
                  }
                  else {
-                     echo 'commentaire :' . $_POST['comment'];
-                     header('Location: index.php?action=post&id=' . $_GET['postId']);
+                     echo 'recette :' . $_POST['resume'];
+                     header('Location: index.php?action=recette&id=' . $_GET['rec_id']);
                  }
              }
          }
@@ -114,14 +124,11 @@ class Blog
              $recetteManager = new RecetteManager();
              $oldRecette = $recetteManager->getRecette($id); 
              
-             if (($_SESSION['id']) == ($oldRecette['user_id']) || $_SESSION['admin'] == true) { // Sécurité bouton supprimé uniquement visible par l'administrateur et le membre qui à posté le commentaire
+             if (($_SESSION['id']) == ($oldRecette['aut_id']) || $_SESSION['admin'] == true) { // Sécurité bouton supprimé uniquement visible par l'administrateur et le membre qui à posté le commentaire
                  $supprimer = $recetteManager->deleteRecette($id);
          
                  if (isset($_SESSION['admin']) && $_SESSION['admin'] == false) { // Redirection page chapitre si ce n'est pas l'administrateur qui supprime le commentaire
-                     header('Location: index.php?action=post&id=' . $_GET['postId']);
-                 }
-                 elseif (isset($_SESSION['admin']) && $_SESSION['admin'] == true) { // Redirection page gestion commentaires adminitrateur si celui-ci supprime un commentaire
-                     header('Location: index.php?action=reportedRecetteAdmin');
+                     header('Location: index.php?action=recette&id=' . $_GET['rec_id']);
                  }
              }
          }

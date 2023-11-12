@@ -27,5 +27,10 @@
             $this->type = $type;
             $this->dateInscription = date("Y/m/d");
         }
+
+        public function connexion()
+        {
+            
+        }
     }
 ?>

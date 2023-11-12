@@ -10,7 +10,6 @@
 <body>
     <!-- header -->
     <?php include ('header.php'); ?> 
-
     <main>
         <img src="../image-logo/image-acceuil.png" id="image-acceuil" title="image libre de droit"/>
         <div id="container">

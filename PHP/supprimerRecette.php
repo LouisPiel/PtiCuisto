@@ -8,12 +8,15 @@
 </head>
 <body>
 
-<form action = "<?php print $_SERVER['PHP_SELF'];?>" method = "post">
+<?php
+    $id = $_GET['id'];
+?>
+
+<form action = "supprimerRecette.php?id=<?php echo $id; ?>" method = "post">
     <div class="supprimerRecette">
-        <p>Identifiant</p>
-        <input type="text" name="idRecette">
+        <h1>Supprimer la recette?</h1>
     </div>
-    <input type="submit" name="inserer" value='Supprimer Recette' onclick="suppressionFunct()">
+    <input type="submit" name="supprimer" value='Supprimer Recette' onclick="suppressionFunct()">
 </form>
 <?php
 $env = parse_ini_file("../.env");
@@ -25,23 +28,29 @@ catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
-
-    if(isset($_POST['idRecette']) && isset($_POST['inserer'])){
-
-        $idRecette = $_POST['idRecette'];
-
-        $requete = "DELETE FROM recette where rec_id=:idRecette";
-
-        $stmt = $pdo->prepare($requete);
-        $stmt->bindValue(':idRecette', $idRecette);
-        $stmt->execute();
+    echo $id;
+    $check = false;
+    if(isset($_POST['supprimer'])){
+        echo '<script type="text/javascript">
+                var check = "nok";
+                window.result = confirm("Etes vous sûr?");
+                if(result == true){
+                    console.log("test");
+                    check = "ok";
+                }
+            </script>';
+            $requete = "DELETE FROM recette where rec_id=:idRecette";
+            $stmt = $pdo->prepare($requete);
+            $stmt->bindValue('idRecette', $id);
+            $stmt->execute();
     }
+
+    echo '<script type="text/javascript">
+            if(window.result == true){
+                location.href = "PageValidation/ValidationSuppression.php?p=rec_modif";
+            }
+        </script>';
 ?>
-<script type="text/JavaScript">
-    function suppressionFunct(){
-        confirm("Etes-vous sûr ?");
-    }
-</script>
 
 </body>
 </html>

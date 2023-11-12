@@ -9,7 +9,7 @@
     <script type="text/javascript">
         function valider(){
             console.log("ca marche");
-            location.href = "PageValidation/ValiderAjouterRecetteIngredient.php?p=rec&id";
+            location.href = "PagesValidation/ValiderAjouterRecetteIngredient.php?p=rec&id";
         }
     </script>
 </head>
@@ -20,7 +20,7 @@
             <input type="text" name="titre">
         </div>
         <div class="formulaireRecette">
-            <p>Contenu</p>
+            <p>Ingrédients</p>
             <textarea id ="contenu" rows="10" cols="40" name="contenu">Détail de la recette avec ingrédients</textarea>
         </div>
         <div class="formulaireRecette">
@@ -59,14 +59,25 @@
 
             if(!empty($_POST['categorie']) && !empty($_POST['auteur']) && !empty($_POST['resume']) && !empty($_POST['titre']) && !empty($_POST['image']) && isset($_POST['inserer'])){
                 $titre = $_POST['titre'];
+                $contenu = $_POST['contenu'];
                 $categorie = $_POST['categorie'];
                 $resume = $_POST['resume'];
                 $image = $_POST['image'];
                 $auteur = $_POST['auteur'];
 
-                $requete = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id, statut) VALUES (
+                echo 'value:'.htmlspecialchars($_POST['contenu']);
+
+                $requete = "INSERT INTO contenu (Contenu) VALUES
+                (
+                :contenu
+                )";
+                $data = $pdo->prepare($requete);
+                $data->bindValue(':contenu', $contenu);
+                $data->execute();
+
+                $requete2 = "INSERT INTO recette (Titre, cont_id, Resume, cat_id, Image, DateCreation, DateModification, aut_id, statut) VALUES (
                 :titre,
-                53,
+                (Select cont_id from contenu where Contenu =:contenu),
                 :resume,
                 (Select cat_id from categorie where Intitule=:categorie),
                 :image,
@@ -76,8 +87,9 @@
                 'MODERATION'
                 )";
 
-                $stmt = $pdo->prepare($requete);
+                $stmt = $pdo->prepare($requete2);
                 $stmt->bindValue(':titre', $titre);
+                $stmt->bindValue(':contenu', $contenu);
                 $stmt->bindValue(':categorie', $categorie);
                 $stmt->bindValue(':resume', $resume);
                 $stmt->bindValue(':image', $image);

@@ -168,6 +168,7 @@
                         echo '</tr>';
                 }
                 echo '<table>';
+                echo '<a href="ajouterRecette.php"> Ajouter une recette!</a>';
             echo '</div>';
         $valider=true;
         }

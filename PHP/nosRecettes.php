@@ -66,7 +66,7 @@
             echo 'B:'.$ingredient;
             echo 'C:'.$num_categorie;
 
-            $requete = $pdo->prepare("SELECT * FROM recette where cat_id = :catid or Titre like :filtre");
+            $requete = $pdo->prepare("SELECT * FROM recette where cat_id = :catid or Titre like :filtre and statut='APROUVE'");
 
             if(empty($caractere)){
                 $requete->bindValue('filtre', $caractere);

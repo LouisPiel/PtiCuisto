@@ -18,7 +18,6 @@
         die('Erreur : ' . $e->getMessage());
     }
     $id = $_GET['id'];
-    echo 'value: '.$id;
     $requete = $pdo->prepare("SELECT * FROM recette where rec_id=:id");
     $requete->execute(['id' => $id]);
     $data = $requete->fetchAll();
@@ -67,18 +66,18 @@
         $requete = "UPDATE recette SET 
         Titre=:titre,
         cont_id=53,
-        Resume=:resume,
+        Resume=:resume2,
         cat_id=:categorie,
-        Image=:image,
+        Image=:image2,
         DateModification=now(),
         statut='MODERATION'
         WHERE rec_id=:id";
 
         $stmt = $pdo->prepare($requete);
         $stmt->bindValue('titre', $titre);
-        $stmt->bindValue('resume', $resume);
+        $stmt->bindValue('resume2', $resume);
         $stmt->bindValue('categorie', $categorie);
-        $stmt->bindValue('image', $image);
+        $stmt->bindValue('image2', $image);
         $stmt->bindValue('id', $id);
         $stmt->execute();
 

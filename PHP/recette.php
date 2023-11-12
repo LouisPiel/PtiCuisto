@@ -6,6 +6,7 @@
     <title>Recette en question</title>
 </head>
 <body>
+<?php include ('header.php'); ?> 
 <?php
     $env = parse_ini_file("../.env");
     try{
@@ -45,7 +46,10 @@
         echo '<h3> Auteur: </h3> <a href="profile.php?id='.$row['aut_id'].'">'.$auteur.'</a>';
         echo '<h3> Date de Creation: </h3> <p>'.$row['DateCreation'].'</p>';
         echo '<h3> Date de Modification: </h3> <p>'.$row['DateModification'].'</p>';
+
+        echo '<a href="modifierRecette.php?id='.$row['rec_id'].'"> Modifier </a> <a href="supprimerRecette.php?id='.$row['rec_id'].'"> Supprimer </a>';
     } 
-?>   
+?>
+<?php include ('footer.php'); ?>
 </body>
 </html>

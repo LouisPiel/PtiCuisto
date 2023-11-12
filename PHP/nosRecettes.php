@@ -8,7 +8,7 @@
     <title>Nos Recettes</title>
 </head>
 <body>
-    <?php include ('header.php'); ?> 
+<?php include ('header.php'); ?> 
     <h2>Filtrer</h2>
         <form action = "<?php print $_SERVER['PHP_SELF'];?>" method = "post">
     <p> Filter (caractère) <p>
@@ -160,11 +160,8 @@
             echo '</div>';
         $valider=true;
         }
-
-        
-     include ('footer.php'); 
-    ?> 
-    
+    ?>
+    <?php include ('footer.php'); ?>
 </body>
 </html>
 

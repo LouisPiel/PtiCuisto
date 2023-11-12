@@ -28,7 +28,6 @@ catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
-    echo $id;
     $check = false;
     if(isset($_POST['supprimer'])){
         echo '<script type="text/javascript">

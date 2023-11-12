@@ -8,7 +8,7 @@
 <body>
     <h1> Votre demande à bien été prise en compte! </h1>
     <h3>L'équipe de modération va etudier votre recette et vous renverra une notification si la recette est approuvé ou désaprouvé.</h3>
-    <button onclick="location.href='../../index.php';"> Retour à l'acceuil</button>
+    <button onclick="location.href='../acceuil.php';"> Retour à l'acceuil</button>
 
     <?php
         $id = $_GET['id'];
